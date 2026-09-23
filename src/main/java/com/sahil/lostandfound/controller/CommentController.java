@@ -21,6 +21,11 @@ public class CommentController {
         return commentRepository.findByItemIdOrderByIdAsc(itemId);
     }
 
+    @GetMapping("/user/{email}")
+    public List<Comment> getCommentsByUserEmail(@PathVariable String email) {
+        return commentRepository.findByUserEmailOrderByIdAsc(email);
+    }
+
     @PostMapping
     public ResponseEntity<Comment> addComment(@RequestBody Comment comment) {
         if (comment.getTime() == null || comment.getTime().isBlank()) {

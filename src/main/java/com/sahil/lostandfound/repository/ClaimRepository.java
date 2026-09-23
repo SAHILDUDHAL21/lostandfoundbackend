@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface ClaimRepository extends JpaRepository<Claim, Long> {
     List<Claim> findByItemIdOrderByIdDesc(Long itemId);
+    List<Claim> findByUserEmailOrderByIdDesc(String userEmail);
 }
 

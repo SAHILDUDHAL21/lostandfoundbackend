@@ -16,6 +16,8 @@ public class Comment {
     @Column(name = "user_name")
     private String user;
 
+    private String userEmail;
+
     @Column(columnDefinition = "TEXT")
     private String avatar;
 
@@ -41,6 +43,15 @@ public class Comment {
         this.text = text;
     }
 
+    public Comment(Long itemId, String user, String userEmail, String avatar, String time, String text) {
+        this.itemId = itemId;
+        this.user = user;
+        this.userEmail = userEmail;
+        this.avatar = avatar;
+        this.time = time;
+        this.text = text;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -49,6 +60,9 @@ public class Comment {
 
     public String getUser() { return user; }
     public void setUser(String user) { this.user = user; }
+
+    public String getUserEmail() { return userEmail; }
+    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
 
     public String getAvatar() { return avatar; }
     public void setAvatar(String avatar) { this.avatar = avatar; }

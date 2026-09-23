@@ -12,6 +12,7 @@ public class ScammerProfile {
 
     private String fullName;
     private String username;
+    private String email;
 
     @Column(columnDefinition = "TEXT")
     private String avatar;
@@ -34,6 +35,16 @@ public class ScammerProfile {
         this.status = status;
     }
 
+    public ScammerProfile(String fullName, String username, String email, String avatar, int failedClaimsCount, String reason, String status) {
+        this.fullName = fullName;
+        this.username = username;
+        this.email = email;
+        this.avatar = avatar;
+        this.failedClaimsCount = failedClaimsCount;
+        this.reason = reason;
+        this.status = status;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -42,6 +53,9 @@ public class ScammerProfile {
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
     public String getAvatar() { return avatar; }
     public void setAvatar(String avatar) { this.avatar = avatar; }

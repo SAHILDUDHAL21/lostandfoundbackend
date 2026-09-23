@@ -7,5 +7,6 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findAllByOrderByIdDesc();
     List<Item> findByTypeOrderByIdDesc(String type);
+    List<Item> findByFinderEmailOrderByIdDesc(String finderEmail);
 }
 

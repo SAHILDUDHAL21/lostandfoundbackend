@@ -43,6 +43,16 @@ public class ItemController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/user/{email}")
+    public List<Item> getItemsByFinderEmail(@PathVariable String email) {
+        List<Item> items = itemRepository.findByFinderEmailOrderByIdDesc(email);
+        for (Item item : items) {
+            item.setClaims(claimRepository.findByItemIdOrderByIdDesc(item.getId()));
+            item.setComments(commentRepository.findByItemIdOrderByIdAsc(item.getId()));
+        }
+        return items;
+    }
+
     @PostMapping
     public ResponseEntity<Item> createFoundItem(@RequestBody Item item) {
         System.out.println(">>> Saving Found Item to PostgreSQL: " + item.getTitle());

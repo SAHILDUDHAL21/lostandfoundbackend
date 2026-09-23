@@ -9,4 +9,5 @@ public interface ScammerRepository extends JpaRepository<ScammerProfile, Long> {
     List<ScammerProfile> findAllByOrderByFailedClaimsCountDesc();
     List<ScammerProfile> findTop100ByOrderByFailedClaimsCountDesc();
     Optional<ScammerProfile> findByFullNameIgnoreCase(String fullName);
+    Optional<ScammerProfile> findByEmailIgnoreCase(String email);
 }

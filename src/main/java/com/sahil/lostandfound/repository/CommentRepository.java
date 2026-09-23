@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findByItemIdOrderByIdAsc(Long itemId);
+    List<Comment> findByUserEmailOrderByIdAsc(String userEmail);
 }
 

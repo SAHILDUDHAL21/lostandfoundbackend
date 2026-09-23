@@ -34,16 +34,25 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Automatically alter existing PostgreSQL columns to TEXT to support unlimited base64 image strings
+        // Automatically alter existing PostgreSQL columns to TEXT to support unlimited base64 image strings and add email columns
         try {
             jdbcTemplate.execute("ALTER TABLE items ALTER COLUMN image TYPE TEXT;");
             jdbcTemplate.execute("ALTER TABLE items ALTER COLUMN finder_avatar TYPE TEXT;");
             jdbcTemplate.execute("ALTER TABLE items ALTER COLUMN description TYPE TEXT;");
+            jdbcTemplate.execute("ALTER TABLE items ADD COLUMN IF NOT EXISTS finder_email VARCHAR(255);");
+
             jdbcTemplate.execute("ALTER TABLE claims ALTER COLUMN avatar TYPE TEXT;");
+            jdbcTemplate.execute("ALTER TABLE claims ADD COLUMN IF NOT EXISTS user_email VARCHAR(255);");
+
             jdbcTemplate.execute("ALTER TABLE comments ALTER COLUMN avatar TYPE TEXT;");
+            jdbcTemplate.execute("ALTER TABLE comments ADD COLUMN IF NOT EXISTS user_email VARCHAR(255);");
+
             jdbcTemplate.execute("ALTER TABLE users ALTER COLUMN avatar TYPE TEXT;");
+
             jdbcTemplate.execute("ALTER TABLE scammers ALTER COLUMN avatar TYPE TEXT;");
-            System.out.println(">>> Successfully migrated all PostgreSQL image/avatar columns to TEXT!");
+            jdbcTemplate.execute("ALTER TABLE scammers ADD COLUMN IF NOT EXISTS email VARCHAR(255);");
+
+            System.out.println(">>> Successfully checked PostgreSQL columns and added user_email/finder_email fields!");
         } catch (Exception e) {
             System.out.println(">>> Database column check complete: " + e.getMessage());
         }
@@ -58,13 +67,15 @@ public class DataInitializer implements CommandLineRunner {
                 ITEM_WALLET,
                 "Priya Sharma",
                 "@priya_s",
-                AVATAR_1
+                AVATAR_1,
+                "priya@example.com"
             );
             item1 = itemRepository.save(item1);
 
             claimRepository.save(new Claim(
                 item1.getId(),
                 "Aarav Mehta",
+                "aarav@example.com",
                 AVATAR_2,
                 "1 hour ago",
                 "PENDING_VERIFICATION",
@@ -74,6 +85,7 @@ public class DataInitializer implements CommandLineRunner {
             claimRepository.save(new Claim(
                 item1.getId(),
                 "Ananya Iyer",
+                "ananya@example.com",
                 AVATAR_3,
                 "30 mins ago",
                 "UNDER_REVIEW",
@@ -83,6 +95,7 @@ public class DataInitializer implements CommandLineRunner {
             commentRepository.save(new Comment(
                 item1.getId(),
                 "Rajesh Kumar",
+                "rajesh@example.com",
                 AVATAR_2,
                 "1h 45m ago",
                 "Did you hand it over to Delhi Metro CISF security desk or holding safe?"
@@ -91,6 +104,7 @@ public class DataInitializer implements CommandLineRunner {
             commentRepository.save(new Comment(
                 item1.getId(),
                 "Priya Sharma",
+                "priya@example.com",
                 AVATAR_1,
                 "1h 30m ago",
                 "Holding it safely! Please submit claim proof above with exact card details so we can arrange meet."
@@ -105,13 +119,15 @@ public class DataInitializer implements CommandLineRunner {
                 ITEM_KEYS,
                 "Vikramaditya Reddy",
                 "@vikram_r",
-                AVATAR_3
+                AVATAR_3,
+                "vikram@example.com"
             );
             item2 = itemRepository.save(item2);
 
             claimRepository.save(new Claim(
                 item2.getId(),
                 "Siddharth Kapoor",
+                "siddharth@example.com",
                 AVATAR_1,
                 "2 hours ago",
                 "PENDING_VERIFICATION",
@@ -121,6 +137,7 @@ public class DataInitializer implements CommandLineRunner {
             commentRepository.save(new Comment(
                 item2.getId(),
                 "Sneha Kulkarni",
+                "sneha@example.com",
                 AVATAR_2,
                 "3 hours ago",
                 "Handed to nearby police booth or holding onto it?"
@@ -131,6 +148,7 @@ public class DataInitializer implements CommandLineRunner {
             scammerRepository.save(new ScammerProfile(
                 "Rohan Verma",
                 "@rohan_v99",
+                "rohan@example.com",
                 AVATAR_1,
                 4,
                 "Fake Amazon Invoice & Unmatched Serial #",
@@ -140,6 +158,7 @@ public class DataInitializer implements CommandLineRunner {
             scammerRepository.save(new ScammerProfile(
                 "Karan Malhotra",
                 "@karan_m",
+                "karan@example.com",
                 AVATAR_2,
                 3,
                 "Incorrect Wallet Contents & Brand",
@@ -149,6 +168,7 @@ public class DataInitializer implements CommandLineRunner {
             scammerRepository.save(new ScammerProfile(
                 "Vikramaditya Singh",
                 "@vikram_s",
+                "vikram_s@example.com",
                 AVATAR_3,
                 2,
                 "Failed Engraving Verification",

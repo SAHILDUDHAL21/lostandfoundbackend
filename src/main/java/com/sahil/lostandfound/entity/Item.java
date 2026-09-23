@@ -27,6 +27,7 @@ public class Item {
 
     private String finderName;
     private String finderHandle;
+    private String finderEmail;
 
     @Column(columnDefinition = "TEXT")
     private String finderAvatar;
@@ -58,6 +59,19 @@ public class Item {
         this.finderAvatar = finderAvatar;
     }
 
+    public Item(String type, String title, String description, String location, String timeAgo, String image, String finderName, String finderHandle, String finderAvatar, String finderEmail) {
+        this.type = type;
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.timeAgo = timeAgo;
+        this.image = image;
+        this.finderName = finderName;
+        this.finderHandle = finderHandle;
+        this.finderAvatar = finderAvatar;
+        this.finderEmail = finderEmail;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -84,6 +98,9 @@ public class Item {
 
     public String getFinderHandle() { return finderHandle; }
     public void setFinderHandle(String finderHandle) { this.finderHandle = finderHandle; }
+
+    public String getFinderEmail() { return finderEmail; }
+    public void setFinderEmail(String finderEmail) { this.finderEmail = finderEmail; }
 
     public String getFinderAvatar() { return finderAvatar; }
     public void setFinderAvatar(String finderAvatar) { this.finderAvatar = finderAvatar; }
