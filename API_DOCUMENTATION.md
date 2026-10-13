@@ -1,10 +1,5 @@
 # 📘 Lost & Found REST API Documentation
 
-**Base URL**: `http://localhost:8080/api`  
-**Database**: Aiven Cloud PostgreSQL (`pg-1771b631-lostandfound.b.aivencloud.com:24159/defaultdb`)  
-**Authentication**: JWT Bearer Token (`Authorization: Bearer <token>`)
-
----
 
 ## 🔑 Authentication Endpoints (`/api/auth`)
 
